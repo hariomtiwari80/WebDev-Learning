@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="Todo.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="todo">
+            <h2>ToDo List</h2>
+
+            <div class="in">
+                <input type="text" placeholder="Enter The Task..." id="input">
+                <button id="button">ADD</button>
+            </div>
+
+            <ul id="task"></ul>
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById("input");
+        const button = document.getElementById("button");
+        const list = document.getElementById("task");
+
+        button.addEventListener("click", () => {
+
+            if (input.value.trim() === "") return;
+            let li = document.createElement("li");
+            let count = list.children.length + 1;
+            li.innerHTML = `${count}. ${input.value} <span class="delete">✖</span>`;
+            list.appendChild(li);
+            input.value = "";
+        });
+
+        list.addEventListener("click", function(e) {
+            if (e.target.classList.contains("delete")) {
+                e.target.parentElement.remove();
+            }
+        });
+    </script>
+
+</body>
+</html>
