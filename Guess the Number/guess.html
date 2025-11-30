@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <link rel="stylesheet" href="guess.css">
+</head>
+<body>
+    <div class="container">
+        <div class="guess">
+            <h2>GUESS THE NUMBER</h2>
+
+            <form id="form">
+                <input type="number" id="guess" required>
+                <button type="submit">Submit</button>
+            </form>
+
+            <div id="mess"></div>
+            <div id="can"></div>
+        </div>
+    </div>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 5;
+
+        const form = document.getElementById("form");
+        const message = document.getElementById("mess");
+        const chance = document.getElementById("can");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let userGuess = Number(document.getElementById("guess").value);
+
+            if (attempts <= 0) return;
+
+            attempts--;
+
+            if (userGuess === randomNumber) {
+                message.textContent = "Congratulations! You guessed it right.";
+                chance.textContent = "";
+            }
+            else if (userGuess > randomNumber) {
+                message.textContent = "Your guess is larger than the actual number.";
+            }
+            else {
+                message.textContent = "Your guess is smaller than the actual number.";
+            }
+
+            chance.textContent = "Remaining Chances: " + attempts;
+
+            if (attempts === 0 && userGuess !== randomNumber) {
+                message.textContent = "Game Over! The number was " + randomNumber;
+            }
+        });
+    </script>
+</body>
+</html>
